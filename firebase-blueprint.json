@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "photoURL": { "type": "string", "description": "User profile photo URL" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Dashboard": {
+      "title": "Dashboard",
+      "description": "A saved dashboard configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique dashboard ID" },
+        "userId": { "type": "string", "description": "Owner's UID" },
+        "name": { "type": "string", "description": "Dashboard name" },
+        "widgets": { "type": "array", "description": "List of chart configurations" },
+        "data": { "type": "array", "description": "The dataset associated with this dashboard" },
+        "summary": { "type": "string", "description": "AI generated summary" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["id", "userId", "name", "widgets", "data"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/dashboards/{dashboardId}": {
+      "schema": "Dashboard",
+      "description": "Saved dashboards"
+    }
+  }
+}
